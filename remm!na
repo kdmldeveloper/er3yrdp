@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Remmina kurulumu başlıyor..."
+sudo apt update -y && sudo apt install -y remmina
+EXTERNAL_IP=$(curl -s http://whatismyip.akamai.com/)
+if [ -z "$EXTERNAL_IP" ]; then
+  echo "Dış IP adresi alınamadı. İnternet bağlantınızı kontrol edin."
+  exit 1
+fi
+read -sp "Uzak bağlantı için şifre girin: " CONNECTION_PASSWORD
+echo
+echo "--------------------------------"
+echo "Bağlantı Bilgileri:"
+echo "IP Adresi: $EXTERNAL_IP"
+echo "VNC Portu: 5900"
+echo "RDP Portu: 3389"
+echo "Bağlantı Şifresi: $CONNECTION_PASSWORD"
+echo "--------------------------------"
+echo "Remmina kuruldu. Uzak bağlantı için yukarıdaki bilgileri kullanabilirsiniz."
